@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="dy_NumofWorks:jar2">
+    <output-path>$PROJECT_DIR$/out/artifacts/dy_NumofWorks_jar2</output-path>
+    <root id="archive" name="dy_NumofWorks.jar">
+      <element id="module-output" name="dy_NumofWorks" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/microsoft/playwright/playwright/1.19.0/playwright-1.19.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/microsoft/playwright/driver-bundle/1.19.0/driver-bundle-1.19.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/microsoft/playwright/driver/1.19.0/driver-1.19.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
