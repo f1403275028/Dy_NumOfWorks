@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.concurrent.*;
 
-class SendHttp {
+class sendHttp {
     public static void main(String[] args) throws InterruptedException {
         // 核心线程数
         int corePoolSize = 1;
