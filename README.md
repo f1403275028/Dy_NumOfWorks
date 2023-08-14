@@ -14,5 +14,6 @@
 
 最后人工点掉第一个验证码 然后程序可以正常执行 应对使用不频繁的场景足够
 
-新增快手、微博作品数定时监控功能 
-动态加载用了selenium和chromeDriver 需要下载chrome对应的chromeDriver才可使用
+新增快手、微博作品数定时监控功能 \n
+快手、微博的作品数是动态加载\n
+用了selenium和chromeDriver 需要下载chrome对应的chromeDriver才可使用
