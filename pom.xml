@@ -24,7 +24,6 @@
             <artifactId>jsoup</artifactId>
             <version>1.14.3</version>
         </dependency>
-
             <!-- Selenium WebDriver -->
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>

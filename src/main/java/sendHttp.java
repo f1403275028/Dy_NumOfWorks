@@ -8,31 +8,45 @@ import java.util.Scanner;
 import java.util.concurrent.*;
 
 class SendHttp {
-    public static void main(String[] args) {
-        String fir = "https://www.douyin.com/search/";
-        String nex=  "?aid=c8d732e9-ae01-429b-859c-315ead058fe8&publish_time=0&sort_type=0&source=search_history&type=general";
+    public static void main(String[] args) throws InterruptedException {
         // 核心线程数
         int corePoolSize = 1;
         Scanner sc = new Scanner(System.in);
         System.out.println("请输入要查询的抖音id");
-        String id = sc.next();
-
+        String idDy = sc.next();
+        System.out.println("请输入要查询的快手id");
+        String idKs = sc.next();
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(corePoolSize);
 
         // 延迟0分钟后开始执行任务，每隔30分钟执行一次
         scheduler.scheduleAtFixedRate(() ->
-                send(fir+id+nex),
+                sendDy(idDy),
                 0,
                 30,
                 TimeUnit.MINUTES);
+
+
+        // 延迟0分钟后开始执行任务，每隔30分钟执行一次
+        scheduler.scheduleAtFixedRate(() ->
+                {
+                   Ks.sendKs(idKs);
+                },
+                5
+                ,
+                1800,
+                TimeUnit.SECONDS);
+
+
     }
 
 
-    public static void send(String dyId){
+    public static void sendDy(String dyId){
+        String fir = "https://www.douyin.com/search/";
+        String nex=  "?aid=c8d732e9-ae01-429b-859c-315ead058fe8&publish_time=0&sort_type=0&source=search_history&type=general";
 
         String content = "";
         //可以换其他用户的id 从url中获取
-        String url = dyId;
+        String url = fir+dyId+nex;
         String link;
         String trimmedLink;
 
@@ -77,7 +91,8 @@ class SendHttp {
              content = (String) page2.evaluate
                      ("() => { return document.querySelector('.J6IbfgzH').textContent; }");
             System.out.println("该用户的作品数为:"+content);
-            File file = new File("D:\\"+"作品数");
+
+            File file = new File("D:\\"+dyId+"的抖音作品数");
             if(file.exists()){
                 System.out.println("存在");
             }else{
