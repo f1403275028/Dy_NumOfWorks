@@ -13,7 +13,8 @@ import java.util.regex.Pattern;
 
 public class Wb {
     private static final Pattern PATTERN = Pattern.compile("\\d+");
-    public static void sendWb(String wbId) {
+    public static String sendWb(String wbId) {
+        String number = null;
         System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Google\\Chrome\\Application\\chromedriver-win64\\chromedriver.exe");
 
         // 创建 ChromeDriver 实例
@@ -46,7 +47,7 @@ public class Wb {
                 Matcher matcher = PATTERN.matcher(firstLine);
 
                 if (matcher.find()) {
-                    String number = matcher.group();
+                     number = matcher.group();
                    // System.out.println("作品数为：" + number);
 
                    // System.out.println("用户名为：" + secondLine);
@@ -65,7 +66,8 @@ public class Wb {
                     }
                     try{
                         FileWriter fw = new FileWriter(file);
-                        fw.write("作品数为"+number);
+                        System.out.println("该微博用户的作品数为：" + number);
+                        fw.write("微博作品数为"+number);
                         fw.flush();
                         fw.close();
                     }catch (IOException e){
@@ -79,6 +81,7 @@ public class Wb {
             // 关闭浏览器
             driver.quit();
         }
+        return  number;
     }
 }
 

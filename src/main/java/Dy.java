@@ -7,8 +7,7 @@ import java.io.IOException;
 
 public class Dy {
 
-
-    public static void sendDy(String dyId){
+    public static String sendDy(String dyId){
         String fir = "https://www.douyin.com/search/";
         String nex=  "?aid=c8d732e9-ae01-429b-859c-315ead058fe8&publish_time=0&sort_type=0&source=search_history&type=general";
 
@@ -58,7 +57,7 @@ public class Dy {
 
             content = (String) page2.evaluate
                     ("() => { return document.querySelector('.J6IbfgzH').textContent; }");
-            System.out.println("该用户的作品数为:"+content);
+            System.out.println("该抖音用户的作品数为:"+content);
 
             File file = new File("D:\\"+dyId+"的抖音作品数");
             if(file.exists()){
@@ -74,7 +73,7 @@ public class Dy {
             }
             try{
                 FileWriter fw = new FileWriter(file);
-                fw.write("作品数为"+content);
+                fw.write("抖音作品数为"+content);
                 fw.flush();
                 fw.close();
             }catch (IOException e){
@@ -84,5 +83,6 @@ public class Dy {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+        return content;
     }
 }

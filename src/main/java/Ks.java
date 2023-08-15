@@ -11,7 +11,7 @@ import java.io.IOException;
 
 
 public class Ks {
-    public static void sendKs(String id_Ks) {
+    public static String sendKs(String id_Ks) {
         // 设置 ChromeDriver 路径
         System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Google\\Chrome\\Application\\chromedriver-win64\\chromedriver.exe");
 
@@ -25,7 +25,7 @@ public class Ks {
             String url = nex+id_Ks;
             driver.get(url);
 
-            Thread.sleep(10000);
+            Thread.sleep(30000);
 
             // 使用显式等待，等待动态加载内容出现
             WebElement element = new WebDriverWait(driver, 60)
@@ -42,7 +42,7 @@ public class Ks {
                 count++;
                 index += searchStr.length();
             }
-            System.out.println("该用户的作品数为：" + count);
+            System.out.println("该快手用户的作品数为：" + count);
             Num = count + "";
 
             File file = new File("D:\\"+id_Ks+"的快手作品数");
@@ -59,7 +59,7 @@ public class Ks {
             }
             try{
                 FileWriter fw = new FileWriter(file);
-                fw.write("作品数为"+Num);
+                fw.write("快手作品数为"+Num);
                 fw.flush();
                 fw.close();
             }catch (IOException e){
@@ -71,5 +71,6 @@ public class Ks {
             // 关闭浏览器
             driver.quit();
         }
+        return Num;
     }
 }
