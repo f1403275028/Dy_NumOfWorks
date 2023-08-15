@@ -13,64 +13,47 @@ import java.util.regex.Pattern;
 
 public class Wb {
     private static final Pattern PATTERN = Pattern.compile("\\d+");
+
     public static String sendWb(String wbId) {
-        String number = null;
         System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Google\\Chrome\\Application\\chromedriver-win64\\chromedriver.exe");
-
-        // 创建 ChromeDriver 实例
         WebDriver driver = new ChromeDriver();
+        String number = null;
 
-        String Num = null;
         try {
-            // 导航到网页
-            String nex = "https://weibo.com/";
-            String af = "?refer_flag=1001030103_";
-            String url = nex+wbId+af;
+            String url = "https://weibo.com/" + wbId + "?refer_flag=1001030103_";
             driver.get(url);
 
             Thread.sleep(10000);
 
-            // 使用显式等待，等待动态加载内容出现
             WebElement element = new WebDriverWait(driver, 10)
                     .until(ExpectedConditions.visibilityOfElementLocated(By.className("container")));
 
-            // 获取动态加载内容
             String content = element.getText();
-            //System.out.println(content);
-
             String[] lines = content.split("\n");
 
             if (lines.length >= 2) {
                 String firstLine = lines[0];
-                String secondLine = lines[1];
-
                 Matcher matcher = PATTERN.matcher(firstLine);
 
                 if (matcher.find()) {
-                     number = matcher.group();
-                   // System.out.println("作品数为：" + number);
+                    number = matcher.group();
+                    System.out.println("该微博用户的作品数为：" + number);
 
-                   // System.out.println("用户名为：" + secondLine);
+                    String secondLine = lines[1];
+                    File file = new File("D:\\" + secondLine + "的微博作品数");
 
-                    File file = new File("D:\\"+secondLine+"的微博作品数");
-                    if(file.exists()){
-                        System.out.println("存在");
-                    }else{
-                        try{
+                    if (!file.exists()) {
+                        try {
                             file.createNewFile();
-
-                        }catch (IOException e){
+                        } catch (IOException e) {
                             e.printStackTrace();
-
                         }
                     }
-                    try{
-                        FileWriter fw = new FileWriter(file);
-                        System.out.println("该微博用户的作品数为：" + number);
-                        fw.write("微博作品数为"+number);
+
+                    try (FileWriter fw = new FileWriter(file)) {
+                        fw.write("微博作品数为" + number);
                         fw.flush();
-                        fw.close();
-                    }catch (IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
@@ -78,11 +61,9 @@ public class Wb {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            // 关闭浏览器
             driver.quit();
         }
-        return  number;
+
+        return number;
     }
 }
-
-
